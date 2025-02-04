@@ -3,7 +3,7 @@ import Profile from "./Profile";
 import Interest from "./Interest";
 import Setting from "./Setting";
 
-export type IForm = {
+type IForm = {
     name: string,
     age: number, 
     email: string,
@@ -18,26 +18,35 @@ const initalFormData: IForm = {
     interest2: ""
 }
 
+export enum DataType {
+    Name,
+    Age,
+    Email,
+    Int1,
+    Int2
+
+}
+
 const Form = () => {
     const [active, setActive] = useState<string>("Profile");
     const [formData, setFormData] = useState<IForm>(initalFormData)
 
-    const handleForm = (val: string, dataType: string) => {
+    const handleForm = (val: string, dataType: DataType) => {
         switch (dataType) { //have proper type than string
-            case "Name":
+            case DataType.Name:
                 setFormData(prev => ({...prev, name: val}))
                 break
-            case "Age":
+            case DataType.Age:
                 setFormData(prev => ({...prev, age: parseInt(val)}))
                 break
-            case "Email":
+            case DataType.Email:
                 setFormData(prev => ({...prev, email: val}))
                 break
-            case "Int1":
+            case DataType.Int1:
                 const v = val == "true"? true : false
                 setFormData(prev => ({...prev, interest1: v}))
                 break
-            case "Int2":
+            case DataType.Int2:
                 setFormData(prev => ({...prev, interest2: val}))
                 break
         }
